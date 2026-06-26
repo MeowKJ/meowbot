@@ -1,0 +1,11 @@
+[Unit]
+Description=Back up Interest Radar SQLite database weekly
+
+[Timer]
+OnCalendar=weekly
+Persistent=true
+RandomizedDelaySec=30m
+
+[Install]
+WantedBy=timers.target
+

@@ -1,0 +1,55 @@
+- name: ai_agent
+  weight: 0.85
+  source: pinned
+  half_life_days: 30
+  keywords: ["ai agent", "agent framework", "tool calling", "openclaw", "local automation"]
+- name: open_hardware
+  weight: 0.95
+  source: pinned
+  half_life_days: 30
+  keywords: ["open hardware", "pcb", "schematic", "crowd supply", "hackaday"]
+- name: risc_v
+  weight: 0.80
+  source: pinned
+  half_life_days: 30
+  keywords: ["risc-v", "riscv", "rv32", "rv64"]
+- name: esp32
+  weight: 0.90
+  source: pinned
+  half_life_days: 30
+  keywords: ["esp32", "esp32-s3", "esp-idf"]
+- name: tinyml
+  weight: 0.85
+  source: pinned
+  half_life_days: 30
+  keywords: ["tinyml", "edge ai", "tflite micro", "camera"]
+- name: robotics
+  weight: 0.80
+  source: pinned
+  half_life_days: 30
+  keywords: ["robot", "robotics", "sensor", "mechanical arm", "servo"]
+- name: reinforcement_learning
+  weight: 0.75
+  source: pinned
+  half_life_days: 30
+  keywords: ["reinforcement learning", "self-play", "game ai", "rl environment"]
+- name: arxiv
+  weight: 0.55
+  source: pinned
+  half_life_days: 30
+  keywords: ["arxiv", "paper", "preprint"]
+- name: deployable_weekend_project
+  weight: 0.90
+  source: pinned
+  half_life_days: 30
+  keywords: ["github", "demo", "open source", "weekend project", "reproducible"]
+- name: crypto
+  weight: -1.0
+  source: blocked
+  half_life_days: 365
+  keywords: ["crypto", "web3", "airdrop", "token", "nft"]
+- name: shallow_llm_wrapper
+  weight: -0.8
+  source: blocked
+  half_life_days: 365
+  keywords: ["ai wrapper", "chatgpt wrapper", "no-code ai product", "marketing"]

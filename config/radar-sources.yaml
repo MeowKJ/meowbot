@@ -1,0 +1,31 @@
+rss:
+  - name: Hackaday
+    url: https://hackaday.com/blog/feed/
+  - name: CNX Software
+    url: https://www.cnx-software.com/feed/
+  - name: Raspberry Pi News
+    url: https://www.raspberrypi.com/news/feed/
+  - name: Arduino Blog
+    url: https://blog.arduino.cc/feed/
+
+github:
+  - query: topic:open-hardware
+  - query: topic:esp32
+  - query: topic:tinyml
+  - query: topic:risc-v
+  - query: topic:robotics
+  - query: topic:reinforcement-learning
+  - query: topic:agent-framework
+
+releases:
+  - espressif/esp-idf
+  - tinygrad/tinygrad
+  - openai/openai-cua-sample-app
+
+arxiv:
+  categories:
+    - cs.AI
+    - cs.LG
+    - cs.RO
+    - cs.HC
+    - cs.CL

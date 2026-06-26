@@ -1,0 +1,13 @@
+[Unit]
+Description=Interest Radar decay learned topics
+
+[Service]
+Type=oneshot
+WorkingDirectory=%h/meowbot
+EnvironmentFile=%h/meowbot/.env
+ExecStart=%h/meowbot/bin/radar decay
+MemoryMax=64M
+CPUQuota=20%
+Nice=10
+NoNewPrivileges=true
+

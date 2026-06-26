@@ -1,0 +1,10 @@
+[Unit]
+Description=Decay Interest Radar learned topics daily
+
+[Timer]
+OnCalendar=*-*-* 03:30:00 Asia/Shanghai
+Persistent=true
+RandomizedDelaySec=15m
+
+[Install]
+WantedBy=timers.target

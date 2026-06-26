@@ -1,0 +1,10 @@
+[Unit]
+Description=Run Interest Radar collection daily
+
+[Timer]
+OnCalendar=*-*-* 07:40:00 Asia/Shanghai
+Persistent=true
+RandomizedDelaySec=10m
+
+[Install]
+WantedBy=timers.target

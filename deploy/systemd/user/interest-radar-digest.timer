@@ -1,0 +1,10 @@
+[Unit]
+Description=Send Interest Radar digest daily
+
+[Timer]
+OnCalendar=*-*-* 08:30:00 Asia/Shanghai
+Persistent=true
+RandomizedDelaySec=5m
+
+[Install]
+WantedBy=timers.target

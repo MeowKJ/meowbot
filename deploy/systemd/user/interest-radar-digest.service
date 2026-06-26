@@ -1,0 +1,17 @@
+[Unit]
+Description=Interest Radar send daily digest through meowbot
+After=network-online.target meowbot.service
+Wants=network-online.target meowbot.service
+
+[Service]
+Type=oneshot
+WorkingDirectory=%h/meowbot
+EnvironmentFile=%h/meowbot/.env
+ExecStart=%h/meowbot/bin/radar digest --send
+MemoryMax=128M
+CPUQuota=35%
+Nice=10
+IOSchedulingClass=best-effort
+IOSchedulingPriority=7
+NoNewPrivileges=true
+

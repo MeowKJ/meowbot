@@ -1,0 +1,49 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.26.x"
+      - run: go test ./...
+      - run: |
+          mkdir -p dist/package/bin
+          GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o dist/package/bin/meowbot ./cmd/meowbot
+          GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o dist/package/bin/radar ./modules/interest-radar/cmd/radar
+          cp -R config deploy scripts .env.example README.md dist/package/
+          tar -czf dist/meowbot-linux-amd64.tar.gz -C dist/package .
+      - name: Upload release bundle
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          port: ${{ secrets.SERVER_PORT || 22 }}
+          source: dist/meowbot-linux-amd64.tar.gz
+          target: /tmp/meowbot-release
+          strip_components: 1
+      - name: Activate over SSH
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          port: ${{ secrets.SERVER_PORT || 22 }}
+          script: |
+            set -euo pipefail
+            DEPLOY_PATH="${{ secrets.DEPLOY_PATH }}"
+            if [ -z "$DEPLOY_PATH" ]; then DEPLOY_PATH="$HOME/meowbot"; fi
+            mkdir -p "$DEPLOY_PATH"
+            tar -xzf /tmp/meowbot-release/meowbot-linux-amd64.tar.gz -C "$DEPLOY_PATH"
+            chmod +x "$DEPLOY_PATH/bin/meowbot" "$DEPLOY_PATH/bin/radar" "$DEPLOY_PATH"/scripts/*.sh
+            cd "$DEPLOY_PATH"
+            ./scripts/install-user-systemd.sh
+            systemctl --user restart meowbot.service
+            systemctl --user status meowbot.service --no-pager

@@ -1,0 +1,13 @@
+[Unit]
+Description=Interest Radar SQLite backup
+
+[Service]
+Type=oneshot
+WorkingDirectory=%h/meowbot
+EnvironmentFile=%h/meowbot/.env
+ExecStart=%h/meowbot/bin/radar backup
+MemoryMax=96M
+CPUQuota=25%
+Nice=10
+NoNewPrivileges=true
+
